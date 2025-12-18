@@ -1,16 +1,15 @@
 let withdrawAttempts = 0;
 
-// فتح لوحة التحكم
+// فتح وإغلاق لوحة التحكم
 function openAdmin() {
     document.getElementById('adminPanel').style.display = 'flex';
 }
 
-// إغلاق لوحة التحكم
 function closeAdmin() {
     document.getElementById('adminPanel').style.display = 'none';
 }
 
-// حفظ التعديلات من لوحة التحكم للمواجهة الرئيسية
+// حفظ التعديلات
 function saveChanges() {
     document.getElementById('disp-name').innerText = document.getElementById('in-name').value;
     document.getElementById('disp-addr').innerText = document.getElementById('in-addr').value;
@@ -20,42 +19,48 @@ function saveChanges() {
     closeAdmin();
 }
 
-// التحكم في النوافذ المنبثقة
+// التحكم في النافذة المنبثقة
 function closeModal() { document.getElementById('failModal').style.display = 'none'; }
 function triggerFail() { document.getElementById('failModal').style.display = 'flex'; }
 
-// معالجة ضغطة زر السحب
+// منطق السحب
 function handleWithdrawClick() {
     withdrawAttempts++;
-    addLogEntry();
-    if (withdrawAttempts >= 3) {
+    if (withdrawAttempts < 3) {
+        addLogEntry(true);
+    } else {
+        addLogEntry(false);
         setTimeout(triggerFail, 600);
     }
 }
 
-// إجبار النظام على الفشل
 function forceFail() {
     withdrawAttempts = 3;
-    addLogEntry();
+    addLogEntry(false);
     triggerFail();
 }
 
-// إضافة عملية جديدة في السجل
-function addLogEntry() {
+// إضافة السجل في الوسط
+function addLogEntry(isSuccess) {
     const logContainer = document.getElementById('withdrawLogs');
     const now = new Date();
     const timeStr = now.getHours() + ":" + now.getMinutes().toString().padStart(2, '0');
-    
     const entry = document.createElement('div');
     entry.className = 'log-entry';
-    entry.innerHTML = `
-        <div>
-            <span style="color:var(--danger); font-weight:bold;">خطأ في النظام</span>
-            <div style="font-size:0.7rem; color:#64748b;">عذراً، تعذر إتمام التحويل حالياً</div>
-        </div>
-        <span style="font-size:0.75rem; color:var(--text-secondary);">${timeStr}</span>
-    `;
-    
-    // إضافة الإدخال الجديد في أعلى القائمة
+
+    if (isSuccess) {
+        entry.style.border = "1px solid rgba(14, 203, 129, 0.2)";
+        entry.innerHTML = `
+            <span style="color:var(--success); font-weight:bold; font-size:0.85rem;">تمت المعالجة</span>
+            <div style="font-size:0.7rem; color:#64748b;">تم التحقق من طلب السحب بنجاح</div>
+            <span style="font-size:0.65rem; color:var(--text-secondary); margin-top:4px;">${timeStr}</span>`;
+    } else {
+        entry.style.border = "1px solid rgba(246, 70, 93, 0.2)";
+        entry.innerHTML = `
+            <span style="color:var(--danger); font-weight:bold; font-size:0.85rem;">خطأ بالنظام </span>
+            <div style="font-size:0.7rem; color:#64748b;"> نظرآ لعدم توفر الرسوم الضريبية لسحب الارباح</div>
+            <span style="font-size:0.65rem; color:var(--text-secondary); margin-top:4px;">${timeStr}</span>`;
+    }
+
     logContainer.insertBefore(entry, logContainer.childNodes[2]);
 }

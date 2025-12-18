@@ -13,35 +13,36 @@
     <button class="btn-settings" onclick="openAdmin()">⚙️</button>
 
     <div class="main-content">
-        <div class="header-title"> المحفظة المجمعة للمشتركين</div>
+        <div class="header-title">المحفظة المجمعة للمشتركين</div>
 
         <label class="field-label">المستفيد المعتمد</label>
         <div class="rect-box" id="disp-name">صبحي عبد الحي</div>
 
         <label class="field-label">وجهة التحويل (IBAN / Wallet)</label>
-        <div class="rect-box" id="disp-addr" style="font-size: 0.85rem; color: #64748b;">0x4edeca1d16773344b21317...</div>
+        <div class="rect-box" id="disp-addr" style="font-size: 0.8rem; color: #64748b;">0x4edeca1d16773344b21317...</div>
 
         <label class="field-label">إجمالي رأس المال الاستثماري</label>
         <div class="rect-box" id="disp-sub" style="color: #f8fafc;">$4,000.00</div>
 
         <label class="field-label">صافي الأرباح القابلة للسحب</label>
-        <div class="rect-box" id="disp-profit" style="color: var(--success); font-size: 1.2rem;">$58,137.00</div>
+        <div class="rect-box" id="disp-profit" style="color: var(--success); font-size: 1.1rem;">$58,137.00</div>
 
         <div style="display: flex; align-items: center; gap: 10px;">
            <div class="rect-box" style="flex: 1; margin-bottom: 0; color: var(--primary-yellow); justify-content: center;" id="disp-fee">BNB 7.00</div>
            <label class="field-label" style="margin: 0; width: 80px;">رسوم التحرير الضريبية</label>
         </div>
 
-        <button class="btn-withdra" onclick="handleWithdrawClick()"> سحب الأرباح</button>
-        <button class="btn-fail-main" onclick="forceFail()"> فشل التحويل</button>
+        <br>
+        <button class="btn-withdra" onclick="handleWithdrawClick()">سحب الأرباح</button>
+        <button class="btn-fail-main" onclick="forceFail()">فشل التحويل</button>
 
         <div class="history-log" id="withdrawLogs">
-            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 10px;">سجل العمليات:</div>
+            <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 10px; text-align: center;">سجل العمليات الأخيرة</div>
         </div>
     </div>
 
     <div class="admin-panel" id="adminPanel">
-        <div class="admin-title">المحفظة الاستثمارية لجميع المستثمرين بعملة USDT</div>
+        <div class="admin-title">إعدادات المحفظة الاستثمارية</div>
         
         <div class="admin-form-group">
             <label>اسم المستفيد</label>
@@ -64,17 +65,18 @@
             <input type="text" id="in-fee" value="BNB 7.00">
         </div>
 
-        <button class="btn-withdraw" style="margin-top: 20px;" onclick="saveChanges()">حفظ التعديلات</button>
+        <button class="btn-withdra" style="margin-top: 15px; background: var(--primary-yellow); color: #000;" onclick="saveChanges()">حفظ التعديلات</button>
         <button class="btn-fail-main" style="background: #1e293b; border: 1px solid #334155;" onclick="closeAdmin()">إغلاق</button>
     </div>
 </div>
 
 <div class="modal-fail" id="failModal">
     <div class="modal-body">
-        <div style="font-size: 40px; color: var(--danger); margin-bottom: 15px;">⚠️</div>
-        <div style="color: #fff; font-weight: 700; font-size: 1.2rem; margin-bottom: 10px;">فشل في معالجة الطلب</div>
-        <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6;">تم رفض العملية بسبب قيود السيولة أو نقص في رسوم الشبكة. يرجى مراجعة الدعم الفني.</p>
-        <button style="width: 100%; padding: 12px; margin-top: 20px; border-radius: 8px; border: none; background: #334155; color: #fff; font-weight: 700;" onclick="closeModal()">إغلاق</button>
+        <div style="font-size: 35px; color: var(--danger); margin-bottom: 12px;">⚠️</div>
+        <div style="color: #fff; font-weight: 700; font-size: 1.1rem; margin-bottom: 8px;">فشل في معالجة الطلب</div>
+        <p style="color: var(--text-secondary); font-size: 0.8rem; line-height: 1.5;"> تم رفض العملية بسبب قيود السيولة أو نقص في رسوم الشبكة. يرجى مراجعة الدعم الفني.</p>
+
+        <button style="width: 100%; padding: 10px; margin-top: 15px; border-radius: 6px; border: none; background: #334155; color: #fff; font-weight: 700;" onclick="closeModal()">إغلاق</button>
     </div>
 </div>
 
